@@ -13,46 +13,51 @@ import (
 func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
-
 	for scanner.Scan() {
 		s := strings.Split(scanner.Text(), ",")
+		fmt.Println(CalcDistance(s))
+	}
+}
 
-		x := 0
-		ne := 0
-		max := 0
+func CalcDistance(s []string) []int {
+		
+	x := 0
+	ne := 0
+	max := 0
 
-		// I had a crack at this with an approximation of a cube based coordinate system
-		// but the maths is hard and I suck. In the end I sought inspiration from
-		// https://www.redblobgames.com/grids/hexagons/ - and am now using axial coordinates
-		for dir := range s {
-			switch s[dir] {
-			case "n":
-				ne++
-			case "s":
-				ne--
-			case "se":
-				x++
-			case "sw":
-				x--
-				ne--
-			case "ne":
-				x++
-				ne++
-			case "nw":
-				x--
-			}
-
-			// Inefficient, but I'm running out of lunchtime.
-			cd := getDistance(x, ne)
-			if cd > max {
-				max = cd
-			}
-
+	// I had a crack at this with an approximation of a cube based coordinate system
+	// but the maths is hard and I suck. In the end I sought inspiration from
+	// https://www.redblobgames.com/grids/hexagons/ - and am now using axial coordinates
+	for dir := range s {
+		switch s[dir] {
+		case "n":
+			ne++
+		case "s":
+			ne--
+		case "se":
+			x++
+		case "sw":
+			x--
+			ne--
+		case "ne":
+			x++
+			ne++
+		case "nw":
+			x--
 		}
 
-		fmt.Println(getDistance(x, ne), max)
+		// Inefficient, but I'm running out of lunchtime.
+		cd := getDistance(x, ne)
+		if cd > max {
+			max = cd
+		}
 
 	}
+
+	cd := getDistance(x, ne)
+	
+	return []int{cd, max}
+
 }
 
 func getDistance(x int, ne int) int {

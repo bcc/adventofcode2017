@@ -25,10 +25,9 @@ func TestCountPipes(t *testing.T) {
 	}
 }
 
-
 func TestCountGroups(t *testing.T) {
 	seen := make(map[int]int)
-	v,_ := CountGroups(seen, tests)
+	v, _ := CountGroups(seen, tests)
 	if v != 2 {
 		t.Error(
 			"For", tests,

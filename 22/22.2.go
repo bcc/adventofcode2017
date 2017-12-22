@@ -6,8 +6,6 @@ import (
 	"os"
 )
 
-// Coords are y,x as first grid array index = y coord.
-
 // cat input | go run 22.2.go
 
 func main() {
